@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        tools:context=".newOffer">
+
+    <TextView
+            android:text="Angebot erstellen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/offer"
+            android:layout_marginEnd="176dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="177dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" android:textColor="#000000"
+            app:layout_constraintHorizontal_bias="0.502" app:layout_constraintVertical_bias="0.0"
+            style="@android:style/Widget.TextView.PopupMenu" android:textStyle="bold"
+            android:textIsSelectable="false" android:selectAllOnFocus="false"/>
+    <EditText
+            android:layout_width="371dp"
+            android:layout_height="111dp"
+            android:inputType="textMultiLine"
+            android:gravity="start|top"
+            android:ems="10"
+            android:id="@+id/descreption"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:hint="Beschreibung" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.6" app:layout_constraintVertical_bias="0.468"/>
+    <EditText
+            android:layout_width="368dp"
+            android:layout_height="49dp"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/roomsNumber"
+            android:hint="Zimmersanzahl"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.488" app:layout_constraintVertical_bias="0.718"/>
+    <EditText
+            android:layout_width="368dp"
+            android:layout_height="51dp"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/preis"
+            android:hint="Preis" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.558"
+            app:layout_constraintVertical_bias="0.616"/>
+    <Button
+            android:text="Einfügen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/add"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="64dp"
+            android:layout_marginTop="104dp"
+            app:layout_constraintVertical_bias="0.858" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.296"
+            style="@android:style/Widget.Holo.Button"/>
+    <Button
+            android:text="Abbrechen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/cancel"
+            android:layout_marginTop="106dp"
+            android:layout_marginStart="64dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintVertical_bias="0.859"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.693" style="@android:style/Widget.Holo.Button"/>
+    <ImageView
+            android:layout_width="413dp"
+            android:layout_height="151dp" tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:id="@+id/imageViewNewOffer"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.125"/>
+    <Button
+            android:text="Bild einfügen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/imageAdd"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.742" app:layout_constraintVertical_bias="0.355"
+            style="@android:style/Widget.Holo.Button"/>
+    <Button
+            android:text="Bild machen"
+            android:layout_width="153dp"
+            android:layout_height="wrap_content" android:id="@+id/takephoto"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.093" app:layout_constraintVertical_bias="0.354"
+            style="@android:style/Widget.Holo.Button"/>
+    <Switch
+            android:text="Vermieten"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/switch2"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.794" app:layout_constraintHorizontal_bias="0.078"
+            android:showText="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" android:textOn=" " android:textOff=" "/>
+</androidx.constraintlayout.widget.ConstraintLayout>
