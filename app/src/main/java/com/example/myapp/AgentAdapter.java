@@ -1,5 +1,6 @@
 package com.example.myapp;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,26 +10,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class AgentAdapter extends RecyclerView.Adapter<AgentAdapter.MyViewHolder> {
 
+    OnOfferListner onOfferListner;
 
+    public AgentAdapter(OnOfferListner onOfferListner) {
+        this.onOfferListner = onOfferListner;
+    }
 
-
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView descreption;
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        public TextView title;
         public TextView preis;
         public TextView roomsNumber;
         public TextView roll;
         public ImageView delete;
         public ImageView objectPhoto;
+        OnOfferListner onOfferListner;
 
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(View itemView, OnOfferListner onOfferListner) {
             super(itemView);
-            descreption = itemView.findViewById(R.id.cardDescreption);
+            title = itemView.findViewById(R.id.cardDescreption);
             preis = itemView.findViewById(R.id.cardpreis);
             roomsNumber = itemView.findViewById(R.id.cardRoomsNumber);
             roll = itemView.findViewById(R.id.cardRoll);
             delete = itemView.findViewById(R.id.image_delete);
             objectPhoto = itemView.findViewById(R.id.imageViewMakler);
+            this.onOfferListner = onOfferListner;
+            itemView.setOnClickListener(this);
+
 
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -41,6 +48,11 @@ public class AgentAdapter extends RecyclerView.Adapter<AgentAdapter.MyViewHolder
 
 
         }
+
+        @Override
+        public void onClick(View v) {
+            onOfferListner.onOfferClick(getAdapterPosition());
+        }
     }
 
 
@@ -49,16 +61,16 @@ public class AgentAdapter extends RecyclerView.Adapter<AgentAdapter.MyViewHolder
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.agent_offers, parent, false);
-        MyViewHolder evh = new MyViewHolder(v);
+        MyViewHolder evh = new MyViewHolder(v,onOfferListner);
         return evh;
     }
 
     @Override
-    public void onBindViewHolder(AgentAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(AgentAdapter.MyViewHolder holder, int position)  {
             Offer offer = Buffer.getOffers().get(position);
             holder.objectPhoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
             holder.objectPhoto.setImageDrawable(offer.getImage().getDrawable());
-            holder.descreption.setText(offer.getDescreption());
+            holder.title.setText(offer.getTitle());
             holder.preis.setText(String.valueOf(offer.getPreis()));
             holder.roomsNumber.setText(String.valueOf(offer.getRoomsNumber()));
             if(offer.isRoll()) {
@@ -72,5 +84,9 @@ public class AgentAdapter extends RecyclerView.Adapter<AgentAdapter.MyViewHolder
     @Override
     public int getItemCount() {
         return Buffer.getOffers().size();
+    }
+
+    public interface OnOfferListner{
+        void onOfferClick(int position);
     }
 }

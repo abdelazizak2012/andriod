@@ -11,7 +11,7 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Agent extends AppCompatActivity {
+public class Agent extends AppCompatActivity implements AgentAdapter.OnOfferListner{
 
 
 
@@ -38,7 +38,7 @@ public class Agent extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.angeboteMakler);
         layoutManager = new LinearLayoutManager(this);
-        adapter = new AgentAdapter();
+        adapter = new AgentAdapter(this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -80,7 +80,14 @@ public class Agent extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onOfferClick(int position) {
+        Bundle extras = new Bundle();
+        extras.putInt("position", position);
+        Intent intent =  new Intent(this, LookupOffer.class);
+        intent.putExtras(extras);
+        startActivity(intent);
+    }
 
 }
 

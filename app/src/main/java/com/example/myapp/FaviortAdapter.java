@@ -14,7 +14,7 @@ public class FaviortAdapter extends RecyclerView.Adapter<FaviortAdapter.MyViewHo
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView descreption;
+        public TextView title;
         public TextView preis;
         public TextView roomsNumber;
         public TextView roll;
@@ -22,7 +22,7 @@ public class FaviortAdapter extends RecyclerView.Adapter<FaviortAdapter.MyViewHo
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            descreption = itemView.findViewById(R.id.cardDescreptionFaviort);
+            title = itemView.findViewById(R.id.cardDescreptionFaviort);
             preis = itemView.findViewById(R.id.cardpreisFaviort);
             roomsNumber = itemView.findViewById(R.id.cardRoomsNumberFaviort);
             roll = itemView.findViewById(R.id.cardRollFaviort);
@@ -51,7 +51,7 @@ public class FaviortAdapter extends RecyclerView.Adapter<FaviortAdapter.MyViewHo
 
         holder.objectPhoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
         holder.objectPhoto.setImageDrawable(offer.getImage().getDrawable());
-        holder.descreption.setText(offer.getDescreption());
+        holder.title.setText(offer.getTitle());
         holder.preis.setText(String.valueOf(offer.getPreis()));
         holder.roomsNumber.setText(String.valueOf(offer.getRoomsNumber()));
         if(offer.isRoll()) {

@@ -14,7 +14,7 @@ public class SeekerAdapter extends RecyclerView.Adapter<SeekerAdapter.MyViewHold
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView descreption;
+        public TextView title;
         public TextView preis;
         public TextView roomsNumber;
         public TextView roll;
@@ -23,7 +23,7 @@ public class SeekerAdapter extends RecyclerView.Adapter<SeekerAdapter.MyViewHold
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            descreption = itemView.findViewById(R.id.cardDescreptionSeeker);
+            title = itemView.findViewById(R.id.cardDescreptionSeeker);
             preis = itemView.findViewById(R.id.cardpreisSeeker);
             roomsNumber = itemView.findViewById(R.id.cardRoomsNumberSeeker);
             roll = itemView.findViewById(R.id.cardRollSeeker);
@@ -70,7 +70,7 @@ public class SeekerAdapter extends RecyclerView.Adapter<SeekerAdapter.MyViewHold
 
         holder.objectPhoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
         holder.objectPhoto.setImageDrawable(offer.getImage().getDrawable());
-        holder.descreption.setText(offer.getDescreption());
+        holder.title.setText(offer.getTitle());
         holder.preis.setText(String.valueOf(offer.getPreis()));
         holder.roomsNumber.setText(String.valueOf(offer.getRoomsNumber()));
         if(offer.isRoll()) {

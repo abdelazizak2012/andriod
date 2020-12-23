@@ -11,6 +11,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.util.ArrayList;
+
 public class newOffer extends AppCompatActivity {
 
     //Request code for camera
@@ -23,10 +25,12 @@ public class newOffer extends AppCompatActivity {
     private Button takePhotoButton;
     private EditText descerption;
     private EditText preis;
+    private EditText title;
     private EditText roomsNumber;
     private ImageView imageView;
     private Buffer buffer;
     private Switch OfferStatus;
+    private ArrayList<ImageView> images = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +51,12 @@ public class newOffer extends AppCompatActivity {
         buffer = new Buffer();
         addButton = (Button) findViewById(R.id.add);
         cancelbutton = (Button) findViewById(R.id.cancel);
+        addImageButton = (Button) findViewById(R.id.imageAdd);
+        takePhotoButton = (Button) findViewById(R.id.takephoto);
         descerption = (EditText) findViewById(R.id.descreption);
         preis = (EditText) findViewById(R.id.preis);
         roomsNumber = (EditText) findViewById(R.id.roomsNumber);
-        addImageButton = (Button) findViewById(R.id.imageAdd);
-        takePhotoButton = (Button) findViewById(R.id.takephoto);
+        title = (EditText) findViewById(R.id.title);
         imageView = (ImageView) findViewById(R.id.imageViewNewOffer);
         OfferStatus = (Switch) findViewById(R.id.switch2);
     }
@@ -87,9 +92,9 @@ public class newOffer extends AppCompatActivity {
         if(id == addButton.getId()) { //add new offer to the agent offersList
             Offer offer;
             if(!OfferStatus.isChecked()){
-                offer  = new Offer(descerption.getText().toString(),Double.parseDouble(preis.getText().toString()),Integer.parseInt(roomsNumber.getText().toString()),false,imageView);
+                offer  = new Offer(title.getText().toString(),descerption.getText().toString(),Double.parseDouble(preis.getText().toString()),Integer.parseInt(roomsNumber.getText().toString()),false,imageView,images);
             } else  {
-                offer  = new Offer(descerption.getText().toString(),Double.parseDouble(preis.getText().toString()),Integer.parseInt(roomsNumber.getText().toString()),true,imageView);
+                offer  = new Offer(title.getText().toString(),descerption.getText().toString(),Double.parseDouble(preis.getText().toString()),Integer.parseInt(roomsNumber.getText().toString()),true,imageView, images);
             }
             buffer.addOffer(offer);
             intent   = new Intent(this, Agent.class);
@@ -100,9 +105,13 @@ public class newOffer extends AppCompatActivity {
             startActivity(intent);
         } else if(id == addImageButton.getId()){ // get photo from gallery
             getImageFromGallery();
+
         } else if(id == takePhotoButton.getId()) {
             //Capture image from camera
             capturePictureFromCamera();
+            ImageView image = new ImageView(this);
+            image.setImageDrawable(imageView.getDrawable());
+            images.add(image);
         }
 
     }
@@ -137,12 +146,21 @@ public class newOffer extends AppCompatActivity {
         if(requestCode == GALLERY_REQUEST && resultCode == RESULT_OK && data != null) {
             Uri imageData = data.getData();
             imageView.setImageURI(imageData);
+
+            ImageView image = new ImageView(this);
+            image.setImageDrawable(imageView.getDrawable());
+            images.add(image);
+
         } //Handle camera request
         else if(requestCode == CAMERA_REQUEST && resultCode == RESULT_OK){
 
             //We need a bitmap variable
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(bitmap);
+
+            ImageView image = new ImageView(this);
+            image.setImageDrawable(imageView.getDrawable());
+            images.add(image);
         }
     }
 
