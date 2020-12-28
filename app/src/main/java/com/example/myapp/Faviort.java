@@ -8,7 +8,7 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Faviort extends AppCompatActivity {
+public class Faviort extends AppCompatActivity implements FaviortAdapter.OnOfferListner {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -23,7 +23,7 @@ public class Faviort extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.offerFaviort);
         layoutManager = new LinearLayoutManager(this);
-        adapter = new FaviortAdapter();
+        adapter = new FaviortAdapter(this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -48,5 +48,15 @@ public class Faviort extends AppCompatActivity {
             startActivity(intent);
         }
 
+    }
+
+    @Override
+    public void onOfferClick(int position) {
+        Bundle extras = new Bundle();
+        extras.putInt("position", position);
+        Intent intent =  new Intent(this, LookupOffer.class);
+        intent.putExtra("class",this.getClass());
+        intent.putExtras(extras);
+        startActivity(intent);
     }
 }

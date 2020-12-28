@@ -11,7 +11,7 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Seeker extends AppCompatActivity {
+public class Seeker extends AppCompatActivity implements SeekerAdapter.OnOfferListner {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -33,7 +33,7 @@ public class Seeker extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.angeboteSucher);
         layoutManager = new LinearLayoutManager(this);
-        adapter = new SeekerAdapter();
+        adapter = new SeekerAdapter(this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -71,5 +71,15 @@ public class Seeker extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onOfferClick(int position) {
+        Bundle extras = new Bundle();
+        extras.putInt("position", position);
+        Intent intent =  new Intent(this, LookupOffer.class);
+        intent.putExtra("class",this.getClass());
+        intent.putExtras(extras);
+        startActivity(intent);
     }
 }

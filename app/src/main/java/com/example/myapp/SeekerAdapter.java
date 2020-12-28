@@ -10,18 +10,22 @@ import androidx.recyclerview.widget.RecyclerView;
 public class SeekerAdapter extends RecyclerView.Adapter<SeekerAdapter.MyViewHolder> {
 
 
+    OnOfferListner onOfferListner;
 
+    public SeekerAdapter(OnOfferListner onOfferListner) {
+        this.onOfferListner = onOfferListner;
+    }
 
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
         public TextView title;
         public TextView preis;
         public TextView roomsNumber;
         public TextView roll;
         public ImageView faviort;
         public ImageView objectPhoto;
+        OnOfferListner onOfferListner;
 
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(View itemView, OnOfferListner onOfferListner) {
             super(itemView);
             title = itemView.findViewById(R.id.cardDescreptionSeeker);
             preis = itemView.findViewById(R.id.cardpreisSeeker);
@@ -29,6 +33,8 @@ public class SeekerAdapter extends RecyclerView.Adapter<SeekerAdapter.MyViewHold
             roll = itemView.findViewById(R.id.cardRollSeeker);
             faviort = itemView.findViewById(R.id.faviortSeeker);
             objectPhoto = itemView.findViewById(R.id.imageViewSeeker);
+            this.onOfferListner = onOfferListner;
+            itemView.setOnClickListener(this);
 
             faviort.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -41,11 +47,14 @@ public class SeekerAdapter extends RecyclerView.Adapter<SeekerAdapter.MyViewHold
                         Buffer.getOffers().get(getAdapterPosition()).setFaviort(true);
                         faviort.setImageResource(R.drawable.heart_clicked);
                     }
-                    SeekerAdapter.super.notifyItemRemoved(getAdapterPosition());
                 }
             });
 
 
+        }
+        @Override
+        public void onClick(View v) {
+            onOfferListner.onOfferClick(getAdapterPosition());
         }
     }
 
@@ -55,7 +64,7 @@ public class SeekerAdapter extends RecyclerView.Adapter<SeekerAdapter.MyViewHold
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.seeker_offers, parent, false);
-        MyViewHolder evh = new MyViewHolder(v);
+        MyViewHolder evh = new MyViewHolder(v,onOfferListner);
         return evh;
     }
 
@@ -84,5 +93,9 @@ public class SeekerAdapter extends RecyclerView.Adapter<SeekerAdapter.MyViewHold
     @Override
     public int getItemCount() {
         return Buffer.getOffers().size();
+    }
+
+    public interface OnOfferListner{
+        void onOfferClick(int position);
     }
 }

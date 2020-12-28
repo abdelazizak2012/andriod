@@ -9,6 +9,8 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.util.ArrayList;
+
 public class LookupOffer extends AppCompatActivity  {
 
     private int position;
@@ -23,16 +25,15 @@ public class LookupOffer extends AppCompatActivity  {
     private Button backImage;
     private  Offer offer ;
     private int nextCounter = 0;
+    private Class<?> backToActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Angebot Sicht");
         setContentView(R.layout.activity_lookup_offer);
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        position = extras.getInt("position"); // get data sent from Agent Activity
-        offer = Buffer.getOffers().get(position);
+        getExtraData();
+
         attribute();
         setOfferAttribute();
         setButtonsListner(back);
@@ -42,6 +43,25 @@ public class LookupOffer extends AppCompatActivity  {
 
 
 
+    }
+
+    private void getExtraData() {
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        backToActivity = (Class<?>) extras.get("class"); // get which class send the data
+        position = extras.getInt("position"); // get data sent from Activity
+        if(backToActivity.getSimpleName().equals("Faviort")) {
+            ArrayList<Offer> offers = new ArrayList<>();
+            for (Offer offer:
+                 Buffer.getOffers()) {
+                if (offer.isFaviort()){
+                    offers.add(offer);
+                }
+            }
+            this.offer = offers.get(position);
+        } else {
+            this.offer = Buffer.getOffers().get(position);
+        }
     }
 
     private void attribute() {
@@ -103,14 +123,13 @@ public class LookupOffer extends AppCompatActivity  {
      */
     private void doJob(int id) {
        if(id == back.getId()) {
-           Intent intent =  new Intent(this, Agent.class);
+           Intent intent =  new Intent(this, backToActivity);
            startActivity(intent);
        } else if ( id == nextImage.getId()) {
            nextCounter++;
            if(nextCounter == offer.getImages().size()){
                nextCounter = 0;
            }
-
            image.setImageDrawable(offer.getImages().get(nextCounter).getDrawable());
        } else if (id == backImage.getId()) {
            nextCounter--;

@@ -85,6 +85,7 @@ public class Agent extends AppCompatActivity implements AgentAdapter.OnOfferList
         Bundle extras = new Bundle();
         extras.putInt("position", position);
         Intent intent =  new Intent(this, LookupOffer.class);
+        intent.putExtra("class",this.getClass());
         intent.putExtras(extras);
         startActivity(intent);
     }

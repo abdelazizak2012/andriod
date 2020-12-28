@@ -12,24 +12,26 @@
     <ImageSwitcher
 
             android:layout_centerVertical="true"
-            android:layout_width="411dp"
-            android:layout_height="150dp"
+            android:layout_width="385dp"
+            android:layout_height="154dp"
             android:id="@+id/imageOffer"
             android:layout_below="@+id/textView"
             android:layout_centerHorizontal="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintTop_toBottomOf="@+id/OfferTitle" app:layout_constraintVertical_bias="0.0"/>
+            app:layout_constraintTop_toBottomOf="@+id/OfferTitle" app:layout_constraintVertical_bias="0.0"
+            android:layout_marginTop="10dp"/>
     <TextView
             android:text="Zimmersanzahl : "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/rollOffer"
-            app:layout_constraintTop_toBottomOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@+id/DescriptionOffer"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" android:textColor="#000000"
-            app:layout_constraintHorizontal_bias="0.047" app:layout_constraintVertical_bias="0.269"/>
+            app:layout_constraintHorizontal_bias="0.934" app:layout_constraintVertical_bias="0.091"
+            android:typeface="sans" android:textStyle="bold"/>
     <TextView
             android:text="Zimmersanzahl : "
             android:layout_width="wrap_content"
@@ -38,7 +40,8 @@
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" android:textColor="#000000"
-            app:layout_constraintHorizontal_bias="0.058" app:layout_constraintVertical_bias="0.171"/>
+            app:layout_constraintHorizontal_bias="0.058" app:layout_constraintVertical_bias="0.171"
+            android:textStyle="bold"/>
     <TextView
             android:text="Preis : "
             android:layout_width="wrap_content"
@@ -47,7 +50,8 @@
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" android:textColor="#000000"
-            app:layout_constraintHorizontal_bias="0.044" app:layout_constraintVertical_bias="0.092"/>
+            app:layout_constraintHorizontal_bias="0.044" app:layout_constraintVertical_bias="0.092"
+            android:textStyle="bold"/>
     <TextView
             android:text="TextView"
             android:layout_width="wrap_content"
@@ -56,7 +60,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" android:textColor="#000000"
             app:layout_constraintTop_toBottomOf="@+id/preisOffer"
             app:layout_constraintVertical_bias="0.171" app:layout_constraintStart_toEndOf="@+id/textView14"
-            app:layout_constraintHorizontal_bias="0.005" android:layout_marginStart="15dp"/>
+            app:layout_constraintHorizontal_bias="0.005" android:layout_marginStart="15dp" android:typeface="sans"/>
     <TextView
             android:text="Beschreibung : "
             android:layout_width="wrap_content"
@@ -65,14 +69,15 @@
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.062" app:layout_constraintVertical_bias="0.379"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" android:textColor="#000000"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" android:textStyle="bold"/>
     <TextView
             android:text="Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/OfferTitle"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.019" android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            app:layout_constraintVertical_bias="0.019" android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold" android:typeface="sans" android:layout_marginBottom="10dp"/>
     <TextView
             android:text="A.K.: Das ist ja nun kein großes Wunder! Wenn Sie die Erfahrung nehmen von Fukushima, dann ist das ja keine eigene Erfahrung von mir, hier in Mitteleuropa, und ich übersetze mir diese Erfahrung in das, was ich erlebt habe mit meiner Familie, meinen Kindern im April und Mai 1986. Mich hat das sehr berührt damals: wir sind richtig geflüchtet, nach Portugal, weil wir einfach niemandem mehr getraut haben. Das heißt also, aus diesem Menetekel, dieser Schrift an der Wand muss man arbeiten, lebenslänglich. Wir haben das nämlich online gestellt nicht jetzt, sondern vor einem halben Jahr und da wussten wir ja nichts von Fukushima..."
             android:scrollbars="vertical"
@@ -82,7 +87,10 @@
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView12"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.037"
-            android:textColor="#000000"/>
+            android:textColor="#000000" android:verticalScrollbarPosition="defaultPosition"
+            android:typeface="monospace" android:textStyle="bold" android:textSize="12sp"
+            android:textDirection="ltr" android:textAlignment="textStart"
+            style="@android:style/Widget.TextView" android:padding="10dp"/>
     <TextView
             android:text="TextView"
             android:layout_width="wrap_content"
@@ -92,7 +100,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" android:textColor="#000000"
             app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.092"
             app:layout_constraintStart_toEndOf="@+id/textView15" android:layout_marginStart="15dp"
-            android:id="@+id/preisOffer"/>
+            android:id="@+id/preisOffer" android:typeface="sans"/>
     <TextView
             android:text="€"
             android:layout_width="17dp"
@@ -103,18 +111,18 @@
             app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.409"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" android:textColor="#020101"/>
     <Button
-            android:layout_width="187dp"
+            android:layout_width="391dp"
             style="@android:style/Widget.Holo.Button"
-            android:layout_height="39dp" android:id="@+id/backToOffers"
+            android:layout_height="45dp" android:id="@+id/backToOffers"
             app:layout_constraintStart_toEndOf="@+id/rollOffer" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/roomsNumberOffer" app:layout_constraintHorizontal_bias="0.877"
-            app:layout_constraintVertical_bias="0.228" android:text="Züruck zu Angebote"/>
+            app:layout_constraintTop_toBottomOf="@+id/roomsNumberOffer" app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintVertical_bias="0.532" android:text="Züruck zu Angebote"/>
     <Button
             style="@android:style/Widget.Holo.Button"
             android:drawableTop="@drawable/next"
-            android:layout_width="120dp"
-            android:layout_height="40dp" android:id="@+id/nextPhoto"
+            android:layout_width="146dp"
+            android:layout_height="39dp" android:id="@+id/nextPhoto"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/backPhoto"
             app:layout_constraintTop_toBottomOf="@+id/imageOffer"
             app:layout_constraintBottom_toTopOf="@+id/textView12" app:layout_constraintHorizontal_bias="1.0"
@@ -122,8 +130,8 @@
     <Button
             style="@android:style/Widget.Holo.Button"
             android:drawableTop="@drawable/back"
-            android:layout_width="120dp"
-            android:layout_height="40dp" android:id="@+id/backPhoto"
+            android:layout_width="146dp"
+            android:layout_height="39dp" android:id="@+id/backPhoto"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/imageOffer"
             app:layout_constraintBottom_toTopOf="@+id/textView12" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0" android:layout_marginStart="40dp"/>
