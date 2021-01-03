@@ -68,6 +68,10 @@ public class Seeker extends AppCompatActivity implements SeekerAdapter.OnOfferLi
                 intent   = new Intent(this, Faviort.class);
                 startActivity(intent);
                 return true;
+            case R.id.einstellungen:
+                intent   = new Intent(this, SreachSettings.class);
+                startActivity(intent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="Favorit" android:id="@+id/favorit"/>
-    <item android:title="Einstellungen" android:id="@+id/einstellungen"/>
+    <item android:title="Suche einstellen" android:id="@+id/einstellungen"/>
 </menu>

@@ -12,6 +12,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".SreachSettings">
+        </activity>
         <activity android:name=".LookupOffer">
         </activity>
         <activity android:name=".Faviort">

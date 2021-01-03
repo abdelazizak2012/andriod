@@ -34,7 +34,7 @@ public class FaviortAdapter extends RecyclerView.Adapter<FaviortAdapter.MyViewHo
             objectPhoto = itemView.findViewById(R.id.imageViewFaviort);
             this.onOfferListner = onOfferListner;
             for (int i = 0; i < Buffer.getOffers().size(); i++) {
-                if(Buffer.getOffers().get(i).isFaviort()) {
+                if(Buffer.getOffers().get(i).isFavourite()) {
                     favoritOffers.add(Buffer.getOffers().get(i));
                 }
             }
@@ -65,7 +65,7 @@ public class FaviortAdapter extends RecyclerView.Adapter<FaviortAdapter.MyViewHo
         holder.objectPhoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
         holder.objectPhoto.setImageDrawable(offer.getImage().getDrawable());
         holder.title.setText(offer.getTitle());
-        holder.preis.setText(String.valueOf(offer.getPreis()));
+        holder.preis.setText(String.valueOf(offer.getPrice()));
         holder.roomsNumber.setText(String.valueOf(offer.getRoomsNumber()));
         if(offer.isRoll()) {
             holder.roll.setText("Kaufen");
@@ -80,7 +80,7 @@ public class FaviortAdapter extends RecyclerView.Adapter<FaviortAdapter.MyViewHo
         int count =0;
         for (Offer offer:
                 Buffer.getOffers()) {
-            if (offer.isFaviort()){
+            if (offer.isFavourite()){
                 count++;
             }
         }

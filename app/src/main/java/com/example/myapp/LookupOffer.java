@@ -3,8 +3,6 @@ package com.example.myapp;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,7 +52,7 @@ public class LookupOffer extends AppCompatActivity  {
             ArrayList<Offer> offers = new ArrayList<>();
             for (Offer offer:
                  Buffer.getOffers()) {
-                if (offer.isFaviort()){
+                if (offer.isFavourite()){
                     offers.add(offer);
                 }
             }
@@ -93,8 +91,8 @@ public class LookupOffer extends AppCompatActivity  {
         });
 
         title.setText(offer.getTitle());
-        discreption.setText(offer.getDescreption());
-        preis.setText(String.valueOf(offer.getPreis()));
+        discreption.setText(offer.getDescription());
+        preis.setText(String.valueOf(offer.getPrice()));
         roomsNumber.setText(String.valueOf(offer.getRoomsNumber()));
         image.setImageDrawable(offer.getImages().get(0).getDrawable());
         if(offer.isRoll()){

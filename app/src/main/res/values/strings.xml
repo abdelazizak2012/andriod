@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">myApp</string>
+
+    <string-array name="offer_art">
+        <item>Verkaufen/Vermieten</item>
+        <item>Vermieten</item>
+        <item>Verkaufen</item>
+    </string-array>
 </resources>

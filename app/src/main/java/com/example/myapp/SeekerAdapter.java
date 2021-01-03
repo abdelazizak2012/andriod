@@ -7,45 +7,64 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class SeekerAdapter extends RecyclerView.Adapter<SeekerAdapter.MyViewHolder> {
 
 
     OnOfferListner onOfferListner;
+    List<Offer> offers;
+
+
 
     public SeekerAdapter(OnOfferListner onOfferListner) {
         this.onOfferListner = onOfferListner;
+        if(Buffer.getOfferArt() == 0) {
+            offers = Buffer.getOffers().stream()
+                    .filter(o -> (o.getPrice() <= Buffer.getPrice() || Buffer.getPrice() == 0) && (o.getRoomsNumber() <= Buffer.getRoomsNumber() || Buffer.getRoomsNumber() == 0)).collect(Collectors.toList());
+        } else if (Buffer.getOfferArt() == 1) {
+            offers = Buffer.getOffers().stream()
+                    .filter(o -> o.isRoll() == false && (o.getPrice() <= Buffer.getPrice() || Buffer.getPrice() == 0) && (o.getRoomsNumber() <= Buffer.getRoomsNumber() || Buffer.getRoomsNumber() == 0)).collect(Collectors.toList());
+        } else {
+            offers =  Buffer.getOffers().stream()
+                    .filter(o -> o.isRoll() == true && (o.getPrice() <= Buffer.getPrice() || Buffer.getPrice() == 0) && (o.getRoomsNumber() <= Buffer.getRoomsNumber() || Buffer.getRoomsNumber() == 0)).collect(Collectors.toList());
+        }
+
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
         public TextView title;
-        public TextView preis;
+        public TextView price;
         public TextView roomsNumber;
         public TextView roll;
-        public ImageView faviort;
+        public ImageView favourite;
         public ImageView objectPhoto;
         OnOfferListner onOfferListner;
 
         public MyViewHolder(View itemView, OnOfferListner onOfferListner) {
             super(itemView);
             title = itemView.findViewById(R.id.cardDescreptionSeeker);
-            preis = itemView.findViewById(R.id.cardpreisSeeker);
+            price = itemView.findViewById(R.id.cardpreisSeeker);
             roomsNumber = itemView.findViewById(R.id.cardRoomsNumberSeeker);
             roll = itemView.findViewById(R.id.cardRollSeeker);
-            faviort = itemView.findViewById(R.id.faviortSeeker);
+            favourite = itemView.findViewById(R.id.faviortSeeker);
             objectPhoto = itemView.findViewById(R.id.imageViewSeeker);
             this.onOfferListner = onOfferListner;
             itemView.setOnClickListener(this);
 
-            faviort.setOnClickListener(new View.OnClickListener() {
+            favourite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Buffer buffer = new Buffer();
-                    if(Buffer.getOffers().get(getAdapterPosition()).isFaviort()){
-                        Buffer.getOffers().get(getAdapterPosition()).setFaviort(false);
-                        faviort.setImageResource(R.drawable.heart);
+                    if(Buffer.getOffers().get(getAdapterPosition()).isFavourite()){
+                        Buffer.getOffers().get(getAdapterPosition()).setFavourite(false);
+                        favourite.setImageResource(R.drawable.heart);
                     }else {
-                        Buffer.getOffers().get(getAdapterPosition()).setFaviort(true);
-                        faviort.setImageResource(R.drawable.heart_clicked);
+                        Buffer.getOffers().get(getAdapterPosition()).setFavourite(true);
+                        favourite.setImageResource(R.drawable.heart_clicked);
                     }
                 }
             });
@@ -70,17 +89,16 @@ public class SeekerAdapter extends RecyclerView.Adapter<SeekerAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(SeekerAdapter.MyViewHolder holder, int position) {
-        Offer offer = Buffer.getOffers().get(position);
-        if(!Buffer.getOffers().get(position).isFaviort()){
-            holder.faviort.setImageResource(R.drawable.heart);
+        Offer offer = offers.get(position);
+        if(!offer.isFavourite()){
+            holder.favourite.setImageResource(R.drawable.heart);
         }else {
-            holder.faviort.setImageResource(R.drawable.heart_clicked);
+            holder.favourite.setImageResource(R.drawable.heart_clicked);
         }
-
         holder.objectPhoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
         holder.objectPhoto.setImageDrawable(offer.getImage().getDrawable());
         holder.title.setText(offer.getTitle());
-        holder.preis.setText(String.valueOf(offer.getPreis()));
+        holder.price.setText(String.valueOf(offer.getPrice()));
         holder.roomsNumber.setText(String.valueOf(offer.getRoomsNumber()));
         if(offer.isRoll()) {
             holder.roll.setText("Kaufen");
@@ -92,7 +110,30 @@ public class SeekerAdapter extends RecyclerView.Adapter<SeekerAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return Buffer.getOffers().size();
+        int size = 0;
+        if(Buffer.getOfferArt() == 0) {
+            for (Offer offer:
+                    Buffer.getOffers()) {
+                if((offer.getPrice() <= Buffer.getPrice() || Buffer.getPrice() == 0) && (offer.getRoomsNumber() <= Buffer.getRoomsNumber() || Buffer.getRoomsNumber() == 0)) {
+                    size++;
+                }
+            }
+        } else if (Buffer.getOfferArt() == 1) {
+            for (Offer offer:
+                 Buffer.getOffers()) {
+                if(!offer.isRoll() && (offer.getPrice() <= Buffer.getPrice() || Buffer.getPrice() == 0) && (offer.getRoomsNumber() <= Buffer.getRoomsNumber() || Buffer.getRoomsNumber() == 0)) {
+                    size++;
+                }
+            }
+        } else {
+            for (Offer offer:
+                    Buffer.getOffers()) {
+                if(offer.isRoll() && (offer.getPrice() <= Buffer.getPrice() || Buffer.getPrice() == 0) && (offer.getRoomsNumber() <= Buffer.getRoomsNumber() || Buffer.getRoomsNumber() == 0)) {
+                    size++;
+                }
+            }
+        }
+        return size;
     }
 
     public interface OnOfferListner{

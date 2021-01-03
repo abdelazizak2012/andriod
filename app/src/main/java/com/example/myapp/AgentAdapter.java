@@ -1,6 +1,5 @@
 package com.example.myapp;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +70,7 @@ public class AgentAdapter extends RecyclerView.Adapter<AgentAdapter.MyViewHolder
             holder.objectPhoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
             holder.objectPhoto.setImageDrawable(offer.getImage().getDrawable());
             holder.title.setText(offer.getTitle());
-            holder.preis.setText(String.valueOf(offer.getPreis()));
+            holder.preis.setText(String.valueOf(offer.getPrice()));
             holder.roomsNumber.setText(String.valueOf(offer.getRoomsNumber()));
             if(offer.isRoll()) {
                 holder.roll.setText("Kaufen");
