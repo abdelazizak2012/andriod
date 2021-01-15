@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
@@ -20,17 +22,22 @@ public class newOffer extends AppCompatActivity {
     //Request code gallery
     private static final int GALLERY_REQUEST = 9;
     private Button addButton;
-    private Button cancelbutton;
+    private Button cancelButton;
     private Button addImageButton;
     private Button takePhotoButton;
-    private EditText descerption;
-    private EditText preis;
+    private EditText description;
+    private EditText price;
     private EditText title;
     private EditText roomsNumber;
     private ImageView imageView;
     private Buffer buffer;
     private Switch OfferStatus;
+    private ImageView undo;
+
     private ArrayList<ImageView> images = new ArrayList<>();
+    private String undoText;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,25 +47,66 @@ public class newOffer extends AppCompatActivity {
         elements();
 
         setButtonsListner(addButton);
-        setButtonsListner(cancelbutton);
+        setButtonsListner(cancelButton);
         setButtonsListner(addImageButton);
         setButtonsListner(takePhotoButton);
         setSwitchListner();
+        setImagesListner();
+        setDescriptionListener();
+
+    }
+
+    private void setDescriptionListener() {
+
+
+        description.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+
+                undoText = s.toString();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+
+            }
+        });
+    }
+
+    private void setImagesListner() {
+        undo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                description.setText(undoText);
+
+            }
+        });
+
 
     }
 
     private void elements() {
         buffer = new Buffer();
         addButton = (Button) findViewById(R.id.add);
-        cancelbutton = (Button) findViewById(R.id.cancel);
+        cancelButton = (Button) findViewById(R.id.cancel);
         addImageButton = (Button) findViewById(R.id.imageAdd);
         takePhotoButton = (Button) findViewById(R.id.takephoto);
-        descerption = (EditText) findViewById(R.id.descreption);
-        preis = (EditText) findViewById(R.id.preis);
+        description = (EditText) findViewById(R.id.descreption);
+        price = (EditText) findViewById(R.id.preis);
         roomsNumber = (EditText) findViewById(R.id.roomsNumber);
         title = (EditText) findViewById(R.id.title);
         imageView = (ImageView) findViewById(R.id.imageViewNewOffer);
         OfferStatus = (Switch) findViewById(R.id.switch2);
+        undo = (ImageView) findViewById(R.id.undo);
+
     }
 
     private void setSwitchListner() {
@@ -83,6 +131,8 @@ public class newOffer extends AppCompatActivity {
         });
     }
 
+
+
     /**
      * doJob method set the action that's occur when button is clicked
      * @param id Button id
@@ -90,17 +140,10 @@ public class newOffer extends AppCompatActivity {
     private void doJob(int id) {
         Intent intent = null;
         if(id == addButton.getId()) { //add new offer to the agent offersList
-            Offer offer;
-            if(!OfferStatus.isChecked()){
-                offer  = new Offer(title.getText().toString(),descerption.getText().toString(),Double.parseDouble(preis.getText().toString()),Integer.parseInt(roomsNumber.getText().toString()),false,imageView,images);
-            } else  {
-                offer  = new Offer(title.getText().toString(),descerption.getText().toString(),Double.parseDouble(preis.getText().toString()),Integer.parseInt(roomsNumber.getText().toString()),true,imageView, images);
-            }
-            buffer.addOffer(offer);
+            buffer.addOffer(new Offer(title.getText().toString(), description.getText().toString(),Double.parseDouble(price.getText().toString()),Integer.parseInt(roomsNumber.getText().toString()),OfferStatus.isChecked(),imageView, images));
             intent   = new Intent(this, Agent.class);
             startActivity(intent);
-
-        } else if(id == cancelbutton.getId()) { // back button
+        } else if(id == cancelButton.getId()) { // back button
             intent   = new Intent(this, Agent.class);
             startActivity(intent);
         } else if(id == addImageButton.getId()){ // get photo from gallery

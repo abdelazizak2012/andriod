@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                     offerImage, offerImages));
 
 
-            ImageView offerImage4 = new ImageView(this);
+      /*      ImageView offerImage4 = new ImageView(this);
             offerImage4.setImageResource(R.drawable.bs4);
             ImageView offerImage5 = new ImageView(this);
             offerImage5.setImageResource(R.drawable.bs5);
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
             Buffer.getOffers().add(new Offer("Wohnung mit 2 Zimmers", "Wir vermieten in einem Mehrfamilienhaus eine drei Zimmer Wohnung im 3 .OG. Eine bereits eingebaute Küche erspart Ihnen beim Einzug Zeit und Mühe, sodass Sie gewissermaßen sofort mit dem Kochen beginnen können.Ausstattung Erstbezug, 3-Zimmer-Wohnung , Wohn- und Schlafzimmer mit Laminatboden, Küche mit Spülmaschine, Herd, Backofen Kühlschrank. Das Badezimmer ist mit begehbarer Dusche, WC, Waschbecken ausgestattet.", 200000, 3, true,
                     offerImage7, offerImages3));
-
+ */
 
             addOneTime++;
         }
